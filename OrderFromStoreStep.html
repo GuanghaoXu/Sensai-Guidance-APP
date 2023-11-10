@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="mainLayout.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+  
+<body>
+  <div class="container-fluid">
+    <!-- Top nav -->
+    <div class="row text-center mt-2" style="background-color: #b2fab4;">
+      <div class="col">
+        <p style="font-size: 40px; font-weight: bold;">Uber Eats</p>
+      </div>
+    </div>
+
+    <div class="row text-center mt-0" style="background-color: #b2fab4;">
+      <div class="col">
+        <p style="font-size: 40px; font-weight: bold;">Search From Store</p>
+      </div>
+    </div>
+    
+
+    <!-- Service icon -->
+    <div class="row text-center mt-0" style = " border-top: 2px solid #000; border-bottom: 2px solid #000;">
+      <!-- Icons as seen on the provided image -->
+      <div class="col mt-3" >
+        <i class="fa fa-book"></i>
+        <p>Read</p>
+      </div>
+      <div class="col mt-3">
+        <i class="fa fa-headphones"></i>
+        <p>Help</p>
+      </div>
+    </div>
+
+    <!-- Step 1 description -->
+    <!-- Text Centered in its own row -->
+    <div class="row mt-3 text-center">
+      <div class="col">
+        <p id="ChangeableText" style="font-size: 30px; font-weight: bold;">Step 1: Click the Search bar and enter the restaurant name.</p>
+      </div>
+    </div>
+    <!-- Image Centered in its own row -->
+    <div class="row mt-3 justify-content-center">
+      <div class="col-auto">
+        <img src="img/Step1.png" id="ChangeableImage" style="width: 500px; height: 700px;">
+      </div>
+      <div class="col-auto position-relative">
+        <div id = "prevContent">
+        </div>
+        <div id = "nextContent">
+             <img src="img/unnamed.jpg" style="cursor: pointer; position: absolute; width: 35px; height: 15px; bottom: 100px; left: 5px;" onclick="changePage()">
+            <!-- 增加 bottom 值来将文本 "Next" 向上移动 -->
+            <p style="position: absolute; bottom: 100px; left: 5px;" >Next</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-3" id = "ButtonRow">
+    </div>
+
+    
+
+    <!-- Bottom nav -->
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+      <a class="navbar-brand" href="index.html"><i class="fa fa-home"></i></a>
+      <a class="navbar-brand" href="history.html"><i class="fa fa-undo"></i></a>
+      <a class="navbar-brand" href="#"><i class="fa fa-comment"></i></a>
+      <a class="navbar-brand" href="#"><i class="fa fa-cog"></i></a>
+    </nav>
+    
+  </div>
+</body>
+
+</html>
+
+<script>
+  var num = 1;
+  function changePage() {
+    var image = document.getElementById('ChangeableImage');
+    var text = document.getElementById('ChangeableText');
+    switch (num) {
+      case 0:
+        $('#prevContent').html('');
+        image.src = 'img/Step1.png';
+        text.textContent = 'Step 1: Click the Search bar and enter the restaurant name.';
+        break;
+      case 1:
+        // 设置新图片的路径
+        $('#prevContent').html(`
+          <img src="img/unnamed.jpg" style="cursor: pointer; position: absolute; width: 35px; height: 15px; top: 20px; left: 5px; transform: rotate(180deg);" onclick="prevPage()">
+          <!-- 修改文本内容为 "Prev" 并调整定位 -->
+          <p style="position: absolute; top: 34px; left: 7px;">Prev</p>
+        `);
+        
+        image.src = 'img/Step2.png';
+        text.textContent = 'Step 2: Select a matching restaurant.';
+        break; // 防止后续代码执行
+      case 2:
+        // 设置新图片的路径
+        image.src = 'img/Step3.png';
+        text.textContent = 'Step 3: Scroll down and click on the item you want to order.';
+        break; // 防止后续代码执行
+      case 3:
+        // 设置新图片的路径
+        image.src = 'img/Step4.png';
+        text.textContent = 'Step 4: Click "Add 1 to cart" button below to add this item.';
+        break; // 防止后续代码执行
+      case 4:
+        // 设置新图片的路径
+        image.src = 'img/Step5.png';
+        text.textContent = 'Step 5: Repeat step3 to choose more items or checkout below.';
+        break; // 防止后续代码执行
+      case 5:
+        // 设置新图片的路径
+        image.src = 'img/Step6.png';
+        text.textContent = 'Step 6: Checkout in cart by clicking "Go to checkout".';
+        break; // 防止后续代码执行
+      case 6:
+        // 设置新图片的路径
+        image.src = 'img/Step7.png';
+        text.textContent = 'Step 7: Check that your personal information is correct and click "Next".';
+        break; // 防止后续代码执行
+      case 7:
+        // 设置新图片的路径
+        image.src = 'img/Step8.jpg';
+        image.style.width = '500px';  // 例如 '300px'
+        image.style.height = '600px'; // 例如 '400px'
+        text.textContent = 'Step 8: Click on "Place order" to complete your order. Congratulations！';
+        $('#ButtonRow').html(`
+          <a href="uber_eats.html">
+            <div class="col-auto">
+              <button type="button" id="prevButton" onclick="ReturnToSearch()">Return to Search</button>
+            </div>
+          </a>
+          <a href="uber_eats.html?triggerPost=true">
+            <div class="col-auto">
+              <button type="button" id="nextButton">See user's post</button>
+            </div>
+          </a>
+        `);
+        $('#nextContent').html('');
+        
+    }
+    num = num + 1;
+  }
+
+  function ReturnToSearch() {}
+
+
+  function prevPage() {
+    var image = document.getElementById('ChangeableImage');
+    if(num == 8){
+      $('#ButtonRow').html('');
+      image.style.width = '500px';
+      image.style.height = '700px';
+      $('#nextContent').html(`
+        <img src="img/unnamed.jpg" style="cursor: pointer; position: absolute; width: 35px; height: 15px; bottom: 100px; left: 5px;" onclick="changePage()">
+        <!-- 增加 bottom 值来将文本 "Next" 向上移动 -->
+        <p style="position: absolute; bottom: 100px; left: 5px;">Next</p>
+      `);
+    }
+    num = num - 2;
+    changePage();
+  }
+  
+</script>
